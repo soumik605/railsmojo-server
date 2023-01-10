@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category: one
+  rails_version: one
+  key: MyString
+  github_link: MyString
+  author_name: MyString
+  piblished_at: 2023-01-10 08:55:24
+
+two:
+  category: two
+  rails_version: two
+  key: MyString
+  github_link: MyString
+  author_name: MyString
+  piblished_at: 2023-01-10 08:55:24

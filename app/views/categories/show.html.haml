@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Rails version:
+  = @category.rails_version
+%p
+  %b Name:
+  = @category.name
+%p
+  %b Slug:
+  = @category.slug
+%p
+  %b Position:
+  = @category.position
+%p
+  %b Is active:
+  = @category.is_active
+
+= link_to 'Edit', edit_category_path(@category)
+\|
+= link_to 'Back', categories_path

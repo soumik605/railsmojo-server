@@ -1,0 +1,2 @@
+class RailsVersion < ApplicationRecord
+end
