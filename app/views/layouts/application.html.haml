@@ -14,7 +14,18 @@
     %main.container.mx-auto.mt-28.px-5.flex
       = yield
 
-  %footer
+  %footer.container.mx-auto.mt-28.px-5.flex
+
+    .flex.flex-col
+      %s.text-base.text-gray-500 Setup backend system
+      %h1.text-2xl Designing UI...
+      %h1.text-base.text-gray-500 Configure CMS
+      %h1.text-base.text-gray-500 Read data from remote Github repo
+      %h1.text-base.text-gray-500 Setup basic scripts
+      %h1.text-base.text-gray-500 Define content creation guidelines
+      %h1.text-base.text-gray-500 Setup & connect Discord server
+      %h1.text-base.text-gray-500 Final Launch
+
     :javascript
       var lightLogo = document.getElementById('light-logo');
       var darkLogo = document.getElementById('dark-logo');
