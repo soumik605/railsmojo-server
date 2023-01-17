@@ -9,7 +9,7 @@
     = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
-  %body
+  %body.dark:bg-gray-900
     = render 'layouts/navbar'
     %main.container.mx-auto.mt-28.px-5.flex
       = yield
