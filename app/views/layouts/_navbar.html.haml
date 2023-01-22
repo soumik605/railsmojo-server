@@ -20,7 +20,31 @@
     #navbar-sticky.items-center.justify-between.hidden.w-full.md:flex.md:w-auto.md:order-1
       %ul.flex.flex-col.p-4.mt-4.border.border-gray-100.rounded-lg.bg-gray-50.md:flex-row.md:space-x-8.md:mt-0.md:text-sm.md:font-medium.md:border-0.md:bg-white.dark:bg-gray-800.md:dark:bg-gray-900.dark:border-gray-700
         %li
-          %a.block.py-2.pl-3.pr-4.text-white.bg-primary-700.rounded.md:bg-transparent.md:text-red-500.md:p-0.dark:text-white{"aria-current" => "page", :href => "#"} Docs
+          %a.flex.items-center.justify-between.py-2.pl-3.pr-4.text-white.bg-primary-700.rounded.md:bg-transparent.md:text-red-500.md:p-0.dark:text-white{"aria-current" => "page", :href => "#", "data-popover-placement" => "bottom", "data-popover-target" => "popover-bottom"} 
+            Learn
+            %svg.w-5.h-5.ml-1{:fill => "currentColor", :viewbox => "0 0 20 20", :xmlns => "http://www.w3.org/2000/svg"}
+              %path{"clip-rule" => "evenodd", :d => "M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z", "fill-rule" => "evenodd"}          
         %li
           %a.block.py-2.pl-3.pr-4.text-gray-700.rounded.hover:bg-gray-100.md:hover:bg-transparent.md:hover:text-primary-700.md:p-0.md:dark:hover:text-white.dark:text-gray-400.dark:hover:bg-gray-700.dark:hover:text-white.md:dark:hover:bg-transparent.dark:border-gray-700{:href => "#"} Community
-        
+
+  -# #mega-menu-full-dropdown.hidden.mt-1.border-gray-200.shadow-sm.bg-gray-50.md:bg-white.border-y.dark:bg-gray-800.dark:border-gray-600
+  #popover-bottom.absolute.z-10.invisible.inline-block.text-sm.font-light.text-gray-500.transition-opacity.duration-300.bg-white.border.border-gray-200.rounded-lg.shadow-sm.opacity-0.dark:text-gray-400.dark:border-gray-600.dark:bg-gray-800{"data-popover" => "", :role => "tooltip", class: "w-1/2"}  
+    .grid.max-w-screen-xl.px-4.py-5.mx-auto.text-gray-900.dark:text-white.sm:grid-cols-2.md:px-6
+      %ul
+        %li
+          %a.block.p-3.rounded-lg.hover:bg-gray-100.dark:hover:bg-gray-700{:href => "#"}
+            .font-semibold Get Started
+            %span.text-sm.font-light.text-gray-500.dark:text-gray-400 Connect with third-party tools that you're already using.
+        %li
+          %a.block.p-3.rounded-lg.hover:bg-gray-100.dark:hover:bg-gray-700{:href => "#"}
+            .font-semibold Best Practices
+            %span.text-sm.font-light.text-gray-500.dark:text-gray-400 Connect with third-party tools that you're already using.
+      %ul
+        %li
+          %a.block.p-3.rounded-lg.hover:bg-gray-100.dark:hover:bg-gray-700{:href => "#"}
+            .font-semibold Day-to-day use cases
+            %span.text-sm.font-light.text-gray-500.dark:text-gray-400 Connect with third-party tools that you're already using.
+        %li
+          %a.block.p-3.rounded-lg.hover:bg-gray-100.dark:hover:bg-gray-700{:href => "#"}
+            .font-semibold Advance use cases
+            %span.text-sm.font-light.text-gray-500.dark:text-gray-400 Connect with third-party tools that you're already using.
