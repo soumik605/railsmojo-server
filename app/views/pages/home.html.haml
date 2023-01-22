@@ -6,10 +6,10 @@
       %svg.ml-2.w-5.h-5{:fill => "currentColor", :viewbox => "0 0 20 20", :xmlns => "http://www.w3.org/2000/svg"}
         %path{"clip-rule" => "evenodd", :d => "M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z", "fill-rule" => "evenodd"}
     .flex.flex-col.space-y-4.sm:flex-row.sm:justify-center.sm:space-y-0.sm:space-x-4
-      %h1.max-w-3xl.mb-4.text-center.text-4xl.font-extrabold.tracking-tight.leading-tight.text-gray-900.md:text-5xl.lg:text-6xl.lg:leading-tight.dark:text-white 
+      %h1.max-w-4xl.mb-4.text-center.text-4xl.font-extrabold.tracking-tight.leading-tight.text-gray-900.md:text-5xl.lg:text-7xl.lg:leading-tight.dark:text-white 
         -# A next generation of Rails community
         Learn to build web apps in Ruby on Rails - for free
-    %p.mb-8.text-lg.font-normal.text-gray-500.lg:text-xl.sm:px-16.xl:px-48.dark:text-gray-400 
+    %p.mb-8.text-base.font-normal.text-gray-500.lg:text-lg.sm:px-16.xl:px-48.dark:text-gray-400 
       -# Helping the next generation of tech enthusiasts to learn Ruby on Rails.
       -# Learn to build web apps in Ruby on Rails - for free. Whether your app is simple or complex, go through our vast set of `How to...?` guides and solve it in no-time.
       %b railsmojo 
@@ -27,30 +27,34 @@
         -#   %path{:d => "M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"}
         Join our community
 %section
-  .grid.grid-flow-col.grid-rows-2.gap-4
-    .card.row-span-2
+  .grid.grid-flow-col.grid-rows-2.grid-cols-7.gap-4
+    .card.row-span-2.col-span-3
       .flex.flex-col.items-center.justify-center.py-10
-        =image_tag "rails-logo.png", class: 'w-24 py-4'
-        %h1.text-6xl.font-semibold.py-4 Rails 7
+        =image_tag "rails-logo.png", class: 'w-24 py-8'
+        %h1.text-6xl.font-bold.py-2 Rails 7
         %p.text-gray-700.text-sm.dark:text-gray-400.max-w-sm.text-center
           The latest and greatest release of Ruby on Rails
-        %p.mt-4.py-4.text-gray-500.dark:text-gray-400.max-w-sm.text-center
-          It packs some amazing new tech like: Hotwire, Turbo, Stimulus, importmap and more
+        %p.mt-8.py-4.text-gray-500.dark:text-gray-400.max-w-sm.text-center
+          It packs some amazing new tech like: Hotwire, Turbo, Stimulus, importmap and more.
         %a.btn-rounded.my-8.text-base.flex.hover:bg-primary-600.hover:text-white.dark:hover:bg-primary-600.dark:hover:text-white{:href => "#"}
           Get Started
           %svg.ml-2.-mr-1.w-5.h-5{:fill => "currentColor", :viewbox => "0 0 20 20", :xmlns => "http://www.w3.org/2000/svg"}
             %path{"clip-rule" => "evenodd", :d => "M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z", "fill-rule" => "evenodd"}
 
 
-    .card.col-span-1.col-span-1
-      Hello
-    .card.row-span-1.col-span-1
-      Hello
-    .card.col-span-1.col-span-1
-      Hello
+    .card.col-span-1.col-span-2
+      %p.mt-4.py-4.text-gray-500.dark:text-gray-400.max-w-sm.text-center
+        It packs some amazing new tech like: Hotwire, Turbo, Stimulus, importmap and more
+    .card.row-span-1.col-span-2
+      %p.mt-4.py-4.text-gray-500.dark:text-gray-400.max-w-sm.text-center
+        It packs some amazing new tech like: Hotwire, Turbo, Stimulus, importmap and more
+    .card.col-span-1.col-span-2
+      %p.mt-4.py-4.text-gray-500.dark:text-gray-400.max-w-sm.text-center
+        It packs some amazing new tech like: Hotwire, Turbo, Stimulus, importmap and more
       
-    .card.row-span-1.col-span-1
-      Hello
+    .card.row-span-1.col-span-2
+      %p.mt-4.py-4.text-gray-500.dark:text-gray-400.max-w-sm.text-center
+        It packs some amazing new tech like: Hotwire, Turbo, Stimulus, importmap and more
     
 
 %section.bg-white.dark:bg-gray-900
