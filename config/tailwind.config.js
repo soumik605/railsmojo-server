@@ -18,12 +18,13 @@ module.exports = {
       'xl': '1280px',
       '2xl': '1536px',
     },
-    colors: {
-      transparent: 'transparent',
-      gray: colors.gray,
-      red: colors.red,
-      pink: colors.pink,
-    },
+    // colors: {
+    //   transparent: 'transparent',
+    //   gray: colors.gray,
+    //   red: colors.red,
+    //   pink: colors.pink,
+    //   lime: colors.lime,
+    // },
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
