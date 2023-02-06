@@ -11,64 +11,35 @@
     = javascript_importmap_tags
   %body.dark:bg-gray-900
     = render 'layouts/navbar'
-    %main
+    %main.container.mx-auto.mt-28.px-5.flex.flex-col
       = yield
-  %footer.p-4.bg-gray-50.md:p-8.lg:p-10.dark:bg-gray-800
-    .mx-auto.max-w-screen-xl.text-center.flex.flex-col.items-center
-      %a.flex.items-center.grow{:href => "https://railsmojo.org/"}
-        = image_tag 'railsmojo-icon.png', class: "mr-3 sm:h-9 lg:h-16 light-logo"
-        = image_tag 'railsmojo-icon.png', class: "mr-3 sm:h-9 lg:h-16 dark-logo"
-      %p.my-6.text-gray-500.dark:text-gray-400 A community of Ruby on Rails Enthusiasts. TODO -> add another sentence here.
-      %div.flex.justify-center.items-center.text-base.text-gray-900.dark:text-white
-        %ul.flex.flex-wrap.justify-center.items-center.mb-6.text-gray-900.dark:text-white
-          %li
-            %a.mr-4.hover:underline.md:mr-6{:href => "#"} About
-          %li
-            %a.mr-4.hover:underline.md:mr-6{:href => "#"} Blog
-          %li
-            %a.mr-4.hover:underline.md:mr-6{:href => "#"} Events
-          %li
-            %a.mr-4.hover:underline.md:mr-6{:href => "#"} Community
-          %li
-            %a.mr-4.hover:underline.md:mr-6{:href => "#"} FAQs
-          %li
-            %a.mr-4.hover:underline.md:mr-6{:href => "#"} Contact
-      %span.text-sm.text-gray-500.sm:text-center.dark:text-gray-400
-        © 2023
-        = succeed "." do
-          %a.hover:underline{:href => "#"} railsmojo
-        All Rights Reserved.
 
+  %footer.container.mx-auto.mt-28.px-5.flex
 
-    -# %footer.container.mx-auto.mt-28.px-5.flex
-
-    -#     .flex.flex-col
-    -#       %s.text-base.text-gray-500 Setup backend system
-    -#       %h1.text-2xl Designing UI...
-    -#       %h1.text-base.text-gray-500 Configure CMS
-    -#       %h1.text-base.text-gray-500 Read data from remote Github repo
-    -#       %h1.text-base.text-gray-500 Setup basic scripts
-    -#       %h1.text-base.text-gray-500 Define content creation guidelines
-    -#       %h1.text-base.text-gray-500 Setup & connect Discord server
-    -#       %h1.text-base.text-gray-500 Final Launch
+    .flex.flex-col
+      %s.text-base.text-gray-500 Setup backend system
+      %h1.text-2xl Designing UI...
+      %h1.text-base.text-gray-500 Configure CMS
+      %h1.text-base.text-gray-500 Read data from remote Github repo
+      %h1.text-base.text-gray-500 Setup basic scripts
+      %h1.text-base.text-gray-500 Define content creation guidelines
+      %h1.text-base.text-gray-500 Setup & connect Discord server
+      %h1.text-base.text-gray-500 Final Launch
 
     :javascript
-      var lightLogo = document.querySelectorAll('.light-logo');
-      var darkLogo = document.querySelectorAll('.dark-logo');
-      console.log(darkLogo);
+      var lightLogo = document.getElementById('light-logo');
+      var darkLogo = document.getElementById('dark-logo');
+
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
       if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
           document.documentElement.classList.add('dark');
-          for (const el of lightLogo) {
-            el.classList.add('hidden');
-          }
+          lightLogo.classList.add('hidden')
     
       } else {
           document.documentElement.classList.remove('dark')
-          for (const el of darkLogo) {
-            el.classList.add('hidden');
-          }
+          darkLogo.classList.add('hidden')
       }
+
       // Toggle dark theme
       var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
       var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
@@ -93,25 +64,13 @@
               if (localStorage.getItem('color-theme') === 'light') {
                   document.documentElement.classList.add('dark');
                   localStorage.setItem('color-theme', 'dark');
-                  // darkLogo.classList.remove('hidden')
-                  for (const el of darkLogo) {
-                    el.classList.remove('hidden');
-                  }                  
-                  // lightLogo.classList.add('hidden')
-                  for (const el of lightLogo) {
-                    el.classList.add('hidden');
-                  }
+                  darkLogo.classList.remove('hidden')
+                  lightLogo.classList.add('hidden')
               } else {
                   document.documentElement.classList.remove('dark');
                   localStorage.setItem('color-theme', 'light');
-                  // darkLogo.classList.add('hidden')
-                  for (const el of darkLogo) {
-                    el.classList.add('hidden');
-                  }
-                  // lightLogo.classList.remove('hidden')
-                  for (const el of lightLogo) {
-                    el.classList.remove('hidden');
-                  }                  
+                  darkLogo.classList.add('hidden')
+                  lightLogo.classList.remove('hidden')
               }
 
           // if NOT set via local storage previously
@@ -119,27 +78,14 @@
               if (document.documentElement.classList.contains('dark')) {
                   document.documentElement.classList.remove('dark');
                   localStorage.setItem('color-theme', 'light');
-                  // darkLogo.classList.add('hidden')
-                  for (const el of darkLogo) {
-                    el.classList.add('hidden');
-                  }                  
-                  // lightLogo.classList.remove('hidden')
-                  for (const el of lightLogo) {
-                    el.classList.remove('hidden');
-                  }                  
+                  darkLogo.classList.add('hidden')
+                  lightLogo.classList.remove('hidden')
                   
               } else {
                   document.documentElement.classList.add('dark');
                   localStorage.setItem('color-theme', 'dark');
-                  // darkLogo.classList.remove('hidden')
-                  for (const el of darkLogo) {
-                    el.classList.remove('hidden');
-                  }                   
-                  // lightLogo.classList.add('hidden')
-                  for (const el of lightLogo) {
-                    el.classList.add('hidden');
-                  }                  
-
+                  darkLogo.classList.remove('hidden')
+                  lightLogo.classList.add('hidden')
               }
           }
           

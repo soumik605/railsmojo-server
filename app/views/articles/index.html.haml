@@ -1,31 +1,23 @@
-%h1 Listing articles
+%h2.mb-4.text-4xl.font-extrabold.leading-none.tracking-tight.text-gray-900.md:text-4xl.lg:text-4xl.dark:text-white Articles
 
-%table
-  %thead
-    %tr
-      %th Category
-      %th Rails version
-      %th Key
-      %th Github link
-      %th Author name
-      %th Piblished at
-      %th
-      %th
-      %th
+= form_with( url: Rails.application.routes.url_helpers.articles_path, method: :get, data: { turbo: true, "turbo-frame": "articles" }) do |f|
+  .flex.justify-between.align-center.p-2
+    .flex.items-center.gap-4
+      = f.select :category_id, options_for_select(@categories.collect{|c| [c.try(:name), c.try(:id)]}), {include_blank: "Select Category"} , {onchange: "javascript:this.form.commit.click();", class: "inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"} 
+      = f.select :rails_version_id, options_for_select(@rails_versions.collect{|v| [v.try(:name), v.try(:id)]}), {include_blank: "Select Rails Version"} , {onchange: "javascript:this.form.commit.click();", class: "inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"} 
+      = f.submit 'save', class: "hidden"
+  
+    .relative
+      .absolute.inset-y-0.left-0.flex.items-center.pl-3.pointer-events-none
+        %svg.w-5.h-5.text-gray-500.dark:text-gray-400{"aria-hidden" => "true", :fill => "none", :stroke => "currentColor", :viewbox => "0 0 24 24", :xmlns => "http://www.w3.org/2000/svg"}
+          %path{:d => "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2"}
+      = f.text_field :search, placeholder: "Search by article", class: "block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"      
 
-  %tbody
+= turbo_frame_tag "articles" do
+  .grid.grid-cols-12.gap-4.mt-4
     - @articles.each do |article|
-      %tr
-        %td= article.category
-        %td= article.rails_version
-        %td= article.key
-        %td= article.github_link
-        %td= article.author_name
-        %td= article.piblished_at
-        %td= link_to 'Show', article
-        %td= link_to 'Edit', edit_article_path(article)
-        %td= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Article', new_article_path
+      .col-span-4 
+        = link_to article_path(article), class: "block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" do
+          %h5.mb-2.text-2xl.font-bold.tracking-tight.text-gray-900.dark:text-white= article.try(:title)
+          %p.font-normal.text-gray-700.dark:text-gray-400= article.category.try(:name)
+          %p.font-normal.text-gray-700.dark:text-gray-400= "Rails #{article.rails_version.try(:name)}"

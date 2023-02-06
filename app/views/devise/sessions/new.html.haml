@@ -1,17 +1,15 @@
-%h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
+.w-full.max-w-sm.p-4.bg-white.border.border-gray-200.rounded-lg.shadow.sm:p-6.md:p-8.dark:bg-gray-800.dark:border-gray-700.mx-auto
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .space-y-4
+      %h5.text-2xl.font-semibold.text-gray-900.dark:text-white Login to railsmojo
+      %div
+        %label.block.mb-1.text-sm.font-medium.text-gray-900.dark:text-white{for: "email"} Email
+        = f.text_field :email, required: true, autofocus: true, autocomplete: "email", id: "email", class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white'
+      %div
+        %label.block.mb-1.text-sm.font-medium.text-gray-900.dark:text-white{for: "password"} Password
+        = f.password_field :password, {required: true, autocomplete: "current-password", "spellcheck" => "false", id: 'password', class: 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white'}
+
+      %button.w-full.text-white.bg-blue-700.hover:bg-blue-800.focus:ring-4.focus:outline-none.focus:ring-blue-300.font-medium.rounded-lg.text-sm.px-5.text-center.dark:bg-blue-600.dark:hover:bg-blue-700.dark:focus:ring-blue-800{class: "py-2.5", type: "submit"} Login to your account
+      .text-sm.font-medium.text-gray-500.dark:text-gray-300
+        Not registered?
+        = link_to "Create account", new_user_registration_path, class: "text-blue-700 hover:underline dark:text-blue-500"

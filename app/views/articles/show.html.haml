@@ -1,24 +1,17 @@
-%p#notice= notice
+.px-2
+  -# %p.font-normal.text-gray-700.dark:text-gray-400= @article.category.try(:name).try(:humanize)
+  %p.font-normal.text-gray-700.dark:text-gray-400= "Rails #{@article.rails_version.try(:name).try(:humanize)}"
+  %h2.mb-4.text-4xl.font-extrabold.leading-none.tracking-tight.text-gray-900.md:text-4xl.lg:text-4xl.dark:text-white= @article.title
 
-%p
-  %b Category:
-  = @article.category
-%p
-  %b Rails version:
-  = @article.rails_version
-%p
-  %b Key:
-  = @article.key
-%p
-  %b Github link:
-  = @article.github_link
-%p
-  %b Author name:
-  = @article.author_name
-%p
-  %b Piblished at:
-  = @article.piblished_at
-
-= link_to 'Edit', edit_article_path(@article)
-\|
-= link_to 'Back', articles_path
+.grid.grid-cols-12.gap-4.mt-4
+  .col-span-8.p-2
+    .md_content.w-full.block.p-4.bg-white.border.border-gray-200.rounded-lg.shadow.dark:bg-gray-800.dark:border-gray-700
+      %pre= @response.html_safe
+  .col-span-4.p-2
+    %h4.mb-4.text-2xl.font-extrabold.leading-none.tracking-tight.text-gray-900.md:text-2xl.lg:text-2xl.dark:text-white Other Articles
+    .grid.grid-cols-12.gap-4.mt-4
+      - @suggested_articles.each do |article|
+        .col-span-12
+          = link_to article_path(article), class: "block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" do
+            %h5.mb-2.text-xl.font-bold.tracking-tight.text-gray-900.dark:text-white= article.try(:title)
+            %p.font-normal.text-gray-700.dark:text-gray-400= "Rails #{article.rails_version.try(:name)}"
