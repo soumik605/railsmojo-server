@@ -29,22 +29,13 @@
 
   -# #mega-menu-full-dropdown.hidden.mt-1.border-gray-200.shadow-sm.bg-gray-50.md:bg-white.border-y.dark:bg-gray-800.dark:border-gray-600
   #popover-bottom.absolute.z-10.invisible.inline-block.text-sm.font-light.text-gray-500.transition-opacity.duration-300.bg-white.border.border-gray-200.rounded-lg.shadow-sm.opacity-0.dark:text-gray-400.dark:border-gray-600.dark:bg-gray-800{"data-popover" => "", :role => "tooltip", class: "w-1/2"}  
-    .grid.max-w-screen-xl.px-4.py-5.mx-auto.text-gray-900.dark:text-white.sm:grid-cols-2.md:px-6
-      %ul
-        %li
-          %a.block.p-3.rounded-lg.hover:bg-gray-100.dark:hover:bg-gray-700{:href => "#"}
-            .font-semibold Get Started
-            %span.text-sm.font-light.text-gray-500.dark:text-gray-400 Connect with third-party tools that you're already using.
-        %li
-          %a.block.p-3.rounded-lg.hover:bg-gray-100.dark:hover:bg-gray-700{:href => "#"}
-            .font-semibold Best Practices
-            %span.text-sm.font-light.text-gray-500.dark:text-gray-400 Connect with third-party tools that you're already using.
-      %ul
-        %li
-          %a.block.p-3.rounded-lg.hover:bg-gray-100.dark:hover:bg-gray-700{:href => "#"}
-            .font-semibold Day-to-day use cases
-            %span.text-sm.font-light.text-gray-500.dark:text-gray-400 Connect with third-party tools that you're already using.
-        %li
-          %a.block.p-3.rounded-lg.hover:bg-gray-100.dark:hover:bg-gray-700{:href => "#"}
-            .font-semibold Advance use cases
-            %span.text-sm.font-light.text-gray-500.dark:text-gray-400 Connect with third-party tools that you're already using.
+    %ul.grid.max-w-screen-xl.px-4.py-5.mx-auto.text-gray-900.dark:text-white.sm:grid-cols-2.md:px-6
+      - _categories = Category.active
+      - _categories.each do |category|
+        %li.col-span-1
+          = link_to articles_path(category_id: category.id) do
+            .block.p-3.rounded-lg.hover:bg-gray-100.dark:hover:bg-gray-700
+              .font-semibold= category.try(:name)
+              %span.text-sm.font-light.text-gray-500.dark:text-gray-400= category.try(:description)
+      
+       

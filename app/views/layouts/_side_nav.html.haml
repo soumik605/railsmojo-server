@@ -1,0 +1,45 @@
+%aside#logo-sidebar.fixed.top-0.left-0.w-56.h-screen.bg-white.border-r.border-gray-200.dark:bg-gray-800.dark:border-gray-700
+	.px-3.pb-4.bg-white.dark:bg-gray-800
+		%a.flex.items-center.grow.py-8{:href => "https://railsmojo.org/"}
+			= image_tag 'railsmojo-logo.png', class: "h-6 mr-3 sm:h-9", id: "light-logo"
+			= image_tag 'railsmojo-logo-dark.png', class: "h-6 mr-3 sm:h-9", id: "dark-logo"
+
+			
+		%ul.space-y-2
+			%li
+				= link_to root_path, class: "h-min" do
+					.flex.items-center.p-2.text-base.font-normal.text-gray-900.rounded-lg.dark:text-white.hover:bg-gray-100.dark:hover:bg-gray-700
+						%svg.w-6.h-6.text-gray-500.transition.duration-75.dark:text-gray-400.group-hover:text-gray-900.dark:group-hover:text-white{"aria-hidden" => "true", fill: "currentColor", viewbox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg"}
+							%path{d: "M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"}
+							%path{d: "M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"}
+						%span.ml-3 Dashboard
+
+			%li
+				= link_to Rails.application.routes.url_helpers.admin_articles_path, class: 'h-min' do
+					.flex.items-center.p-2.text-base.font-normal.text-gray-900.rounded-lg.dark:text-white.hover:bg-gray-100.dark:hover:bg-gray-700
+						%svg.flex-shrink-0.w-6.h-6.text-gray-500.transition.duration-75.dark:text-gray-400{"aria-hidden" => "true", fill: "currentColor", :stroke => "currentColor", viewbox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg"}
+							%path{d: "M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"}
+						%span.ml-3 Articles
+
+			%li
+				= link_to admin_categories_path, class: "h-min" do
+					.flex.items-center.p-2.text-base.font-normal.text-gray-900.rounded-lg.dark:text-white.hover:bg-gray-100.dark:hover:bg-gray-700
+						%svg.w-6.h-6.text-gray-500.transition.duration-75.dark:text-gray-400.group-hover:text-gray-900.dark:group-hover:text-white{"aria-hidden" => "true", fill: "currentColor", viewbox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg"}
+							%path{d: "M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"}
+							%path{d: "M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"}
+						%span.ml-3 Categories
+
+			%li
+				= link_to admin_rails_versions_path, class: "h-min" do
+					.flex.items-center.p-2.text-base.font-normal.text-gray-900.rounded-lg.dark:text-white.hover:bg-gray-100.dark:hover:bg-gray-700
+						%svg.w-6.h-6.text-gray-500.transition.duration-75.dark:text-gray-400.group-hover:text-gray-900.dark:group-hover:text-white{"aria-hidden" => "true", fill: "currentColor", viewbox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg"}
+							%path{d: "M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"}
+							%path{d: "M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"}
+						%span.ml-3 Rails Versions
+
+			%li
+				= link_to Rails.application.routes.url_helpers.destroy_user_session_path, method: :delete, data: { turbo_method: :delete } , class: 'h-min' do
+					.flex.items-center.p-2.text-base.font-normal.text-gray-900.rounded-lg.dark:text-white.hover:bg-gray-100.dark:hover:bg-gray-700
+						%svg.w-6.h-6.text-gray-500.transition.duration-75.dark:text-gray-400.group-hover:text-gray-900.dark:group-hover:text-white{:fill => "none", :stroke => "currentColor",  :height => "18", :viewbox => "0 0 24 24", :width => "18", :xmlns => "http://www.w3.org/2000/svg"}
+							%path{:d => "M16.6667 17.8333L22.5 12M22.5 12L16.6667 6.16667M22.5 12H8.5M8.5 1.5H7.1C5.13982 1.5 4.15973 1.5 3.41103 1.88148C2.75247 2.21703 2.21703 2.75247 1.88148 3.41103C1.5 4.15972 1.5 5.13982 1.5 7.1V16.9C1.5 18.8602 1.5 19.8403 1.88148 20.589C2.21703 21.2475 2.75247 21.783 3.41103 22.1185C4.15972 22.5 5.13982 22.5 7.1 22.5H8.5",  "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2"}
+						%span.ml-3 Logout

@@ -77,3 +77,6 @@ end
 gem "haml-rails", "~> 2.0"
 gem 'html2haml'
 gem "devise"
+gem 'will_paginate', '~> 3.3'
+gem "octokit", "~> 5.0"
+gem "figaro"

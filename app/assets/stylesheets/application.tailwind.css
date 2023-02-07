@@ -22,3 +22,68 @@
 .font-apple-ligothic {
   font-family: Apple-LiGothiC-Medium;
 }
+
+.go-text-field{
+  @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
+}
+
+
+/* pagination */
+.will_pag {
+  /* background: white;
+  cursor: default; */
+}
+.will_pag a, .will_pag span, .will_pag em {
+  padding: 0.2em 0.5em;
+  display: block;
+  float: left;
+  margin-right: 4px; 
+  border-radius: 4px;
+}
+.will_pag .disabled {
+  color: #999999;
+  border: 1px solid #dddddd; 
+}
+.will_pag .current {
+  font-style: normal;
+  font-weight: bold;
+  background: s#FEF2E9;
+  color: #F48020;
+  border: 1px solid #F48020; 
+}
+.will_pag a {
+  text-decoration: none;
+  color: #000;
+  border: 1px solid #7E7E8D; 
+}
+.will_pag a:hover, .will_pag a:focus {
+  color: #F48020;
+  border: 1px solid #F48020; 
+}
+.will_pag .page_info {
+  padding: 0.4em 0.6em;
+  width: 22em;
+  margin-bottom: 0.3em;
+  text-align: center; 
+}
+.will_pag .page_info b {
+  color: #000033;
+  background: #6aa6ed;
+  padding: 0.1em 0.25em; 
+}
+.will_pag:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden; 
+}
+* html .will_pag {
+  height: 1%; 
+}
+*:first-child + html .will_pag {
+  overflow: hidden; 
+}
+.md_content *{
+  @apply text-gray-900 hover:text-gray-900 dark:text-white; 
+}

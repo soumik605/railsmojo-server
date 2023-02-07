@@ -1,70 +1,27 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[ show edit update destroy ]
+  require 'octokit'
+  skip_before_action :authenticate_user!
+  before_action :set_article, only: %i[ show ]
 
-  # GET /articles or /articles.json
   def index
     @articles = Article.all
+    @articles = @articles.by_category(params[:category_id]) if params[:category_id].present?
+    @articles = @articles.by_rails_version(params[:rails_version_id]) if params[:rails_version_id].present?
+    @articles = @articles.search_by_text(params[:search]) if params[:search].present?
+
+    @categories = Category.active
+    @rails_versions = RailsVersion.active
   end
 
-  # GET /articles/1 or /articles/1.json
   def show
+    client = Octokit::Client.new(:access_token => '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')
+    @response = client.contents('soumik605/soumik605', path: @article.github_link, query: {},  :accept => 'application/vnd.github.html')
+    @suggested_articles = Article.by_category(@article.category_id).where.not(id: params[:id]).limit(10)
   end
 
-  # GET /articles/new
-  def new
-    @article = Article.new
+  private 
+
+  def set_article
+    @article = Article.find_by_id(params[:id])
   end
-
-  # GET /articles/1/edit
-  def edit
-  end
-
-  # POST /articles or /articles.json
-  def create
-    @article = Article.new(article_params)
-
-    respond_to do |format|
-      if @article.save
-        format.html { redirect_to article_url(@article), notice: "Article was successfully created." }
-        format.json { render :show, status: :created, location: @article }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /articles/1 or /articles/1.json
-  def update
-    respond_to do |format|
-      if @article.update(article_params)
-        format.html { redirect_to article_url(@article), notice: "Article was successfully updated." }
-        format.json { render :show, status: :ok, location: @article }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /articles/1 or /articles/1.json
-  def destroy
-    @article.destroy
-
-    respond_to do |format|
-      format.html { redirect_to articles_url, notice: "Article was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_article
-      @article = Article.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def article_params
-      params.require(:article).permit(:category_id, :rails_version_id, :key, :github_link, :author_name, :piblished_at)
-    end
 end
