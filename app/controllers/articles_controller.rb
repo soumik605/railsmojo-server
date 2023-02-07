@@ -14,8 +14,8 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    client = Octokit::Client.new(:access_token => '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')
-    @response = client.contents('soumik605/soumik605', path: @article.github_link, query: {},  :accept => 'application/vnd.github.html')
+    client = Octokit::Client.new(:access_token => "#{Figaro.env.GITHUB_ACCESS_TOKEN}")
+    @response = client.contents("soumik605/soumik605", path: @article.github_link, query: {},  :accept => 'application/vnd.github.html')
     @suggested_articles = Article.by_category(@article.category_id).where.not(id: params[:id]).limit(10)
   end
 

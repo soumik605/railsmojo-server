@@ -16,6 +16,7 @@ class Admin::ArticlesController < ApplicationController
   def show
     client = Octokit::Client.new(:access_token => Figaro.env.GITHUB_ACCESS_TOKEN)
     @response = client.contents(Figaro.env.GITHUB_REPO, path: @article.github_link, query: {},  :accept => 'application/vnd.github.html')
+    @suggested_articles = Article.by_category(@article.category_id).where.not(id: params[:id]).limit(10)
   end
 
   def create
