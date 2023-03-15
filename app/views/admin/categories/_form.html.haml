@@ -1,0 +1,34 @@
+= form_with(model: category, url: (category.persisted? ? Rails.application.routes.url_helpers.admin_category_path(category) : Rails.application.routes.url_helpers.admin_categories_path), class: "contents", data: { turbo_frame: "_top"}) do |form|
+  .flex.items-start.justify-between.p-4.border-b.rounded-t.dark:border-gray-600
+    %h3.text-xl.font-semibold.text-gray-900.dark:text-white= category.persisted? ? "Update Category" : "Create Category"
+    %button.text-gray-400.bg-transparent.hover:bg-gray-200.hover:text-gray-900.rounded-lg.text-sm.ml-auto.inline-flex.items-center.dark:hover:bg-gray-600.dark:hover:text-white{class: "p-1.5", "data-modal-hide" => category.persisted? ? "category_#{category.id}" : category.parent_category_id.present? ? "new_sub_category_#{category.parent_category_id}" : "category_new", type: "button"}
+      %svg.w-5.h-5{"aria-hidden" => "true", fill: "currentColor", viewbox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg"}
+        %path{"clip-rule" => "evenodd", d: "M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z", "fill-rule" => "evenodd"}
+      %span.sr-only Close modal
+  .grid.grid-cols-12.gap-4.px-4.py-6
+    .col-span-6
+      = form.label :rails_version, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      = form.select :rails_version_id, options_for_select(@rails_versions.collect{|v| [v.try(:name), v.try(:id)]}, category.try(:rails_version_id)), {} , {class: "go-text-field"} 
+    .col-span-6
+      = form.label :parent_category_id, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      = form.select :parent_category_id, options_for_select(Category.all.collect{|v| [v.try(:name), v.try(:id)]}, category.try(:parent_category_id)), {include_blank: 'Select Parent Category'} , {class: "go-text-field"} 
+    .col-span-6
+      = form.label :name, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      = form.text_field :name, required: true, class: "go-text-field"
+    .col-span-6
+      = form.label :slug, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      = form.text_field :slug, required: true, class: "go-text-field"
+    .col-span-6
+      = form.label :position, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      = form.number_field :position, required: true, class: "go-text-field"
+    .col-span-6
+      = form.label :description, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      = form.text_area :description, required: true, class: "go-text-field"
+
+    .col-span-12.flex.items-center.gap-4
+      = form.check_box :is_active, {class: "w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800", :type => "button"}
+      = form.label :is_active, "Active?", class: "block text-sm font-medium text-gray-900 dark:text-white"
+
+  .p-4.flex.justify-end.items-center.gap-4.border-t.dark:border-gray-600
+    = form.submit "Submit", class: "block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm py-2 px-5 cursor-pointer text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    %button.text-gray-500.bg-white.hover:bg-gray-100.focus:ring-4.focus:outline-none.focus:ring-blue-300.rounded-lg.border.border-gray-200.text-sm.font-medium.px-5.hover:text-gray-900.focus:z-10.dark:bg-gray-700.dark:text-gray-300.dark:border-gray-500.dark:hover:text-white.dark:hover:bg-gray-600.dark:focus:ring-gray-600{class: "py-2.5", "data-modal-hide" => category.persisted? ? "category_#{category.id}" : category.parent_category_id.present? ? "new_sub_category_#{category.parent_category_id}" : "category_new", type: "button"} Decline

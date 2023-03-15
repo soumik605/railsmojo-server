@@ -1,0 +1,54 @@
+.flex.items-center.justify-between.mb-2
+	%h3.mb-4.text-2xl.font-extrabold.leading-none.tracking-tight.text-gray-900.md:text-2xl.lg:text-2xl.dark:text-white Articles
+	%button.block.text-white.bg-blue-700.hover:bg-blue-800.focus:ring-4.focus:outline-none.focus:ring-blue-300.font-medium.rounded-lg.text-sm.px-5.text-center.dark:bg-blue-600.dark:hover:bg-blue-700.dark:focus:ring-blue-800{class: "py-2.5", "data-modal-target" => "article_new", "data-modal-toggle" => "article_new", type: "button"}
+		New Article
+#article_new.fixed.top-0.left-0.right-0.z-50.hidden.w-full.p-4.overflow-x-hidden.overflow-y-auto.md:inset-0.h-modal.md:h-full{"aria-hidden" => "true", tabindex: "-1"}
+	.relative.w-full.h-full.max-w-2xl.md:h-auto
+		.relative.bg-white.rounded-lg.shadow.dark:bg-gray-700
+			= render "admin/articles/form", article: @article
+
+
+.relative.overflow-x-auto.shadow-md.sm:rounded-lg
+	= turbo_frame_tag "articles" do
+		%table.w-full.text-sm.text-left.text-gray-500.dark:text-gray-400
+			%thead.text-xs.text-gray-700.uppercase.bg-gray-50.dark:bg-gray-700.dark:text-gray-400
+				%tr
+					%th.px-6.py-3{scope: "col"}
+						Category
+					%th.px-6.py-3{scope: "col"}
+						Rails Version
+					%th.px-6.py-3{scope: "col"}
+						Key
+					%th.px-6.py-3{scope: "col"}
+						Author
+					%th.px-6.py-3{scope: "col"}
+						Published at
+					%th.px-6.py-3{scope: "col"}
+						
+			%tbody
+				- @articles.each do |article|
+					%tr.bg-white.border-b.dark:bg-gray-800.dark:border-gray-700.hover:bg-gray-50.dark:hover:bg-gray-600
+						%th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{scope: "row"}
+							= article.try(:category).try(:name)
+						%td.px-6.py-4
+							= article.try(:rails_version).try(:name)
+						%td.px-6.py-4
+							= link_to article.try(:key), admin_article_path(article)
+						%td.px-6.py-4
+							= article.try(:author_name)
+						%td.px-6.py-4
+							= article.try(:piblished_at)
+						%td.px-6.py-4
+							.flex.items-center.gap-4
+								.font-medium.text-blue-600.dark:text-blue-500.cursor-pointer{"data-modal-target" => "article_#{article.try(:id)}", "data-modal-toggle" => "article_#{article.try(:id)}", type: "button"} Edit
+								.font-medium.text-red-600.dark:text-red-500.cursor-pointer{"data-modal-target" => "delete_article_#{article.try(:id)}", "data-modal-toggle" => "delete_article_#{article.try(:id)}", type: "button"} Destroy
+							.fixed.top-0.left-0.right-0.z-50.hidden.w-full.p-4.overflow-x-hidden.overflow-y-auto.md:inset-0.h-modal.md:h-full{id: "article_#{article.try(:id)}", "aria-hidden" => "true", tabindex: "-1"}
+								.relative.w-full.h-full.max-w-2xl.md:h-auto
+									.relative.bg-white.rounded-lg.shadow.dark:bg-gray-700
+										= render "admin/articles/form", article: article
+							.fixed.top-0.left-0.right-0.z-50.hidden.p-4.overflow-x-hidden.overflow-y-auto.md:inset-0.h-modal.md:h-full{id: "delete_article_#{article.try(:id)}", "aria-hidden" => "true", tabindex: "-1"}
+								.relative.w-full.h-full.max-w-md.md:h-auto
+									.relative.bg-white.rounded-lg.shadow.dark:bg-gray-700
+										= render "admin/shared/destroy_modal", model: article, url: Rails.application.routes.url_helpers.admin_article_path(article), id: "delete_article_#{article.try(:id)}", confirm_text: "Are you sure you want to delete this article?"
+		.flex.justify-center
+			= will_paginate @articles, :class => "will_pag py-2"

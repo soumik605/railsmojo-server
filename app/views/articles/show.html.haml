@@ -1,24 +1,30 @@
-%p#notice= notice
+.mt-0
+  = render 'articles/side_nav'
+  .sm:ml-64.pt-20.p-4
+    .px-2
+      -# %p.font-normal.text-gray-700.dark:text-gray-400= @article.category.try(:name).try(:humanize)
+      %p.font-normal.text-gray-700.dark:text-gray-400= "Rails #{@article.rails_version.try(:name).try(:humanize)}"
+      %h2.mb-4.text-4xl.font-extrabold.leading-none.tracking-tight.text-gray-900.md:text-4xl.lg:text-4xl.dark:text-white= @article.title
 
-%p
-  %b Category:
-  = @article.category
-%p
-  %b Rails version:
-  = @article.rails_version
-%p
-  %b Key:
-  = @article.key
-%p
-  %b Github link:
-  = @article.github_link
-%p
-  %b Author name:
-  = @article.author_name
-%p
-  %b Piblished at:
-  = @article.piblished_at
+    .grid.grid-cols-12.gap-4.mt-4
+      .col-span-8.p-2
+        .md_content.w-full.block.p-4.bg-white.border.border-gray-200.rounded-lg.shadow.dark:bg-gray-800.dark:border-gray-700
+          %pre= @response.html_safe
+      .col-span-4.p-2
+        %h4.mb-4.text-2xl.font-extrabold.leading-none.tracking-tight.text-gray-900.md:text-2xl.lg:text-2xl.dark:text-white Other Articles
+        .grid.grid-cols-12.gap-4.mt-4
+          - @suggested_articles.each do |article|
+            .col-span-12
+              = link_to article_path(article), class: "block max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" do
+                %h5.mb-2.text-xl.font-bold.tracking-tight.text-gray-900.dark:text-white= article.try(:title)
+                %p.font-normal.text-gray-700.dark:text-gray-400= "Rails #{article.rails_version.try(:name)}"
 
-= link_to 'Edit', edit_article_path(@article)
-\|
-= link_to 'Back', articles_path
+    .flex.justify-between.items-center 
+      = link_to "#", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" do
+        %svg.w-5.h-5.text-white.sm:w-6.sm:h-6.dark:text-gray-800{"aria-hidden" => "true", fill: "none", stroke: "currentColor", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg"}
+          %path{d: "M15 19l-7-7 7-7", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2"}
+        Previous
+      = link_to "#", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" do
+        Next
+        %svg.w-5.h-5.text-white.sm:w-6.sm:h-6.dark:text-gray-800{"aria-hidden" => "true", fill: "none", stroke: "currentColor", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg"}
+          %path{d: "M9 5l7 7-7 7", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2"}
