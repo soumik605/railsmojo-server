@@ -13,7 +13,6 @@
 			%thead.text-xs.text-gray-700.uppercase.bg-gray-50.dark:bg-gray-700.dark:text-gray-400
 				%tr
 					%th.px-6.py-3{scope: "col"}
-					%th.px-6.py-3{scope: "col"}
 						Name
 					%th.px-6.py-3{scope: "col"}
 						Parent Category
@@ -25,9 +24,9 @@
 						Sub categories
 					%th.px-6.py-3{scope: "col"}
 						
-			%tbody
+			%tbody{"data-controller" => "sortable"}
 				- @categories.each do |category|					
-					%tr.bg-white.border-b.dark:bg-gray-800.dark:border-gray-700.hover:bg-gray-50.dark:hover:bg-gray-600
+					%tr.bg-white.border-b.dark:bg-gray-800.dark:border-gray-700.hover:bg-gray-50.dark:hover:bg-gray-600{"data-sortable-update-url" => update_position_admin_category_path(category)}
 						%td.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white.flex.gap-4.items-center{scope: "row"}
 							%span.flex.w-2.h-2.rounded-full{class: category.try(:is_active) ? 'bg-green-600' : 'bg-orange-600' }
 							= category.try(:name)

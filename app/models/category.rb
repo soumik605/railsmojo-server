@@ -5,7 +5,7 @@ class Category < ApplicationRecord
   has_many :categories, foreign_key: :parent_category_id, dependent: :destroy, inverse_of: :parent_category
 
   validates_presence_of :name, :slug, :position, :description
-  validates_uniqueness_of :name, :slug, :position
+  validates_uniqueness_of :name, :slug
 
   scope :active, ->               { where( is_active: true )}
 
@@ -34,5 +34,17 @@ class Category < ApplicationRecord
 
     _cat.get_parent_categories(_cat.parent_category_id, _arr) if  _cat.try(:parent_category_id).present?
     _arr
+  end
+
+  def change_category_position position 
+    notice = ""
+    if self.position.to_i > position.to_i # move top
+      Category.where("position BETWEEN ? AND ?", position.to_i, self.position.to_i - 1).each { |cat| cat.update(position: cat.position + 1) }
+    elsif self.position.to_i < position.to_i # move bottom
+      Category.where("position BETWEEN ? AND ?", self.position.to_i + 1, position.to_i).each { |cat| cat.update(position: cat.position - 1) }
+    end
+    if self.update(position: position)
+      notice = "success"
+    end
   end
 end

@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   namespace :admin do
     resources :articles, only: [:index, :show, :create, :update, :destroy]
-    resources :categories, only: [:index, :show, :create, :update, :destroy]
+    resources :categories, only: [:index, :show, :create, :update, :destroy] do
+      member do
+        patch :update_position
+      end
+    end
     resources :rails_versions, only: [:index, :show, :create, :update, :destroy]
   end
 

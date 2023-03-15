@@ -1,9 +1,9 @@
 class Admin::CategoriesController < ApplicationController
   layout 'admin'
-  before_action :set_category, only: %i[ show edit update destroy ]
+  before_action :set_category, only: %i[ show edit update destroy update_position ]
 
   def index
-    @categories = Category.all
+    @categories = Category.all.order("position")
     @categories = @categories.paginate(:page => params[:page], :per_page => 10)
 
     @category = Category.new
@@ -46,6 +46,19 @@ class Admin::CategoriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to admin_categories_url, notice: "Category was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def update_position
+    if @category.present? and @category.try(:position).present? and params[:position].present?
+      result = @category.change_category_position params[:position]
+      respond_to do |format|
+        if result == 'success'
+          format.html { redirect_to admin_categories_path, notice: "Categories were successfully sorted." }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+        end
+      end
     end
   end
 
