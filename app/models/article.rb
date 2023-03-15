@@ -21,4 +21,13 @@ class Article < ApplicationRecord
       articles.title ilike ?
     SQL
   end
+
+  def self.get_articles_list
+    list = []
+    Category.where(parent_category_id: nil).order("position").each do |c|
+      list << c.get_articles(c.articles.pluck(:id))
+    end
+    list
+  end
+
 end

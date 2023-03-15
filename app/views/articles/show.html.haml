@@ -19,12 +19,11 @@
                 %h5.mb-2.text-xl.font-bold.tracking-tight.text-gray-900.dark:text-white= article.try(:title)
                 %p.font-normal.text-gray-700.dark:text-gray-400= "Rails #{article.rails_version.try(:name)}"
 
-    .flex.justify-between.items-center 
-      = link_to "#", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" do
-        %svg.w-5.h-5.text-white.sm:w-6.sm:h-6.dark:text-gray-800{"aria-hidden" => "true", fill: "none", stroke: "currentColor", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg"}
-          %path{d: "M15 19l-7-7 7-7", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2"}
-        Previous
-      = link_to "#", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" do
-        Next
-        %svg.w-5.h-5.text-white.sm:w-6.sm:h-6.dark:text-gray-800{"aria-hidden" => "true", fill: "none", stroke: "currentColor", viewbox: "0 0 24 24", xmlns: "http://www.w3.org/2000/svg"}
-          %path{d: "M9 5l7 7-7 7", "stroke-linecap" => "round", "stroke-linejoin" => "round", "stroke-width" => "2"}
+    .flex.justify-between.items-center.my-6.px-2
+      = link_to @previous_article.present? ? article_path(@previous_article) : get_started_articles_path, class: "py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" do
+        %span.mr-2{"aria-hidden" => "true"} ←
+        = @previous_article.present? ? @previous_article.try(:title) : "Get Started"
+        
+      = link_to @next_article.present? ? article_path(@next_article) : what_next_articles_path, class: "py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" do
+        = @next_article.present? ? @next_article.try(:title) : "What Next"
+        %span.ml-2{"aria-hidden" => "true"} →

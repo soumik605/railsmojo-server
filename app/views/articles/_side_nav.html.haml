@@ -7,7 +7,7 @@
 			= image_tag 'railsmojo-logo-dark.png', class: "h-6 mr-3 sm:h-9", id: "dark-logo"
 
 	= link_to "Get Started", get_started_articles_path, class: "flex.items-center w-full p-1 text-xs font-normal text-gray-900 transition duration-75 rounded-lg group dark:text-white"
-	- Category.where(parent_category_id: nil).each do |category|
+	- Category.where(parent_category_id: nil).order("position").each do |category|
 		%button.flex.items-center.w-full.p-1.text-xs.font-normal.text-gray-900.transition.duration-75.rounded-lg.group.dark:text-white{"aria-controls" => "dropdown-category-#{category.try(:id)}", "data-collapse-toggle" => "dropdown-category-#{category.try(:id)}", type: "button"}
 			%svg.w-5.h-5{fill: "currentColor", "sidebar-toggle-item" => "", viewbox: "0 0 20 20", xmlns: "http://www.w3.org/2000/svg"}
 				%path{"clip-rule" => "evenodd", d: "M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z", "fill-rule" => "evenodd"}

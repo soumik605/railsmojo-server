@@ -4,12 +4,19 @@ import "controllers"
 import 'flowbite';
 
 
-var active_article = document.getElementById("sidebar-active-article")
-if (active_article){
-  active_article.value.split(" ").forEach(i => {
-    var item = document.getElementById(`dropdown-category-${i}`)
-    if (item){
-      item.classList.remove("hidden");
-    }
-  });
+toggleSidebarCategory()
+document.addEventListener("turbo:render", function (e) {
+  toggleSidebarCategory()
+})
+
+function toggleSidebarCategory(){
+  var active_article = document.getElementById("sidebar-active-article")
+  if (active_article){
+    active_article.value.split(" ").forEach(i => {
+      var item = document.getElementById(`dropdown-category-${i}`)
+      if (item){
+        item.classList.remove("hidden");
+      }
+    });
+  }
 }
