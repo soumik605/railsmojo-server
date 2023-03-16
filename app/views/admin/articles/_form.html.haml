@@ -19,9 +19,6 @@
       = form.label :author_name, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
       = form.select :author_name, options_for_select(User.all.collect{|v| [v.try(:email), v.try(:email)]}, article.try(:author_name)), {} , {class: "go-text-field"} 
     .col-span-6
-      = form.label :key, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-      = form.text_field :key, required: true, class: "go-text-field"
-    .col-span-6
       = form.label :github_link, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
       = form.text_field :github_link, required: true, class: "go-text-field"
 

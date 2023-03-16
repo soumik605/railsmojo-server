@@ -34,9 +34,13 @@ class ArticlesController < ApplicationController
   end
 
   def get_started
+    _articles_list = Article.get_articles_list
+    @next_article = _articles_list.flatten.count > 0 ? Article.find_by_id(_articles_list.flatten[0]) : nil
   end
 
   def what_next
+    _articles_list = Article.get_articles_list
+    @previous_article = _articles_list.flatten.count > 0 ? Article.find_by_id(_articles_list.flatten[-1]) : nil
   end
 
   private 

@@ -9,6 +9,7 @@ class Category < ApplicationRecord
 
   scope :active, ->               { where( is_active: true )}
 
+  before_validation :set_attributes, :on => :create
 
   def get_sub_categories(categories, articles)
     str = ""
@@ -53,5 +54,12 @@ class Category < ApplicationRecord
     if self.update(position: position)
       notice = "success"
     end
+  end
+
+  private
+
+  def set_attributes
+    self.slug = Category.all.count == 0 ? "category-1" : "category-#{Category.last.id + 1}"
+    self.position = Category.all.count == 0 ? 1 : Category.all.pluck(:position).max.to_i + 1
   end
 end

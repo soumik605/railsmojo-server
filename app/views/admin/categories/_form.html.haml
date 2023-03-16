@@ -7,20 +7,14 @@
       %span.sr-only Close modal
   .grid.grid-cols-12.gap-4.px-4.py-6
     .col-span-6
+      = form.label :name, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      = form.text_field :name, required: true, class: "go-text-field"
+    .col-span-6
       = form.label :rails_version, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
       = form.select :rails_version_id, options_for_select(@rails_versions.collect{|v| [v.try(:name), v.try(:id)]}, category.try(:rails_version_id)), {} , {class: "go-text-field"} 
     .col-span-6
       = form.label :parent_category_id, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
       = form.select :parent_category_id, options_for_select(Category.all.collect{|v| [v.try(:name), v.try(:id)]}, category.try(:parent_category_id)), {include_blank: 'Select Parent Category'} , {class: "go-text-field"} 
-    .col-span-6
-      = form.label :name, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-      = form.text_field :name, required: true, class: "go-text-field"
-    .col-span-6
-      = form.label :slug, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-      = form.text_field :slug, required: true, class: "go-text-field"
-    .col-span-6
-      = form.label :position, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-      = form.number_field :position, required: true, class: "go-text-field"
     .col-span-6
       = form.label :description, class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white"
       = form.text_area :description, required: true, class: "go-text-field"

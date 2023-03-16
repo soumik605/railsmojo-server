@@ -8,7 +8,7 @@ class Article < ApplicationRecord
   scope :by_category,             -> (category) { where( category_id: category )}
   scope :by_rails_version,             -> (rails_version) { where( rails_version_id: rails_version )}
 
-  before_create :set_attributes
+  before_validation :set_attributes, :on => :create
 
   private
 
@@ -28,6 +28,10 @@ class Article < ApplicationRecord
       list << c.get_articles(c.articles.pluck(:id))
     end
     list
+  end
+
+  def set_attributes
+    self.key = Article.all.count == 0 ? "article-key-1" : "article-key-#{Article.last.id + 1}"
   end
 
 end
