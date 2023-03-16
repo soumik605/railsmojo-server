@@ -1,9 +1,63 @@
 .mt-0
   = render 'articles/side_nav'
   .sm:ml-64.pt-20.p-4
-    .px-2
-      %p.font-normal.text-gray-700.dark:text-gray-400 Get Started
-      %h2.mb-4.text-4xl.font-extrabold.leading-none.tracking-tight.text-gray-900.md:text-4xl.lg:text-4xl.dark:text-white Get Started
+    %section
+
+    .py-8.px-4.mx-auto.max-w-screen-xl.text-center.mb-12.lg:py-16.lg:px-12
+      .flex.items-center.justify-center
+        %div
+          %h1.max-w-4xl.mb-4.text-center.text-4xl.font-extrabold.tracking-tight.leading-tight.text-gray-900.md:text-5xl.lg:text-7xl.lg:leading-tight.dark:text-white 
+            Get Started with
+          %h1.bg-red-600.rounded.max-w-4xl.mb-4.text-center.text-4xl.font-extrabold.tracking-tight.leading-tight.text-white.md:text-5xl.lg:text-7xl.lg:leading-tight.dark:text-white 
+            Ruby on Rails
+      %p.mb-8.text-base.font-normal.text-gray-500.lg:text-lg.sm:px-16.xl:px-48.dark:text-gray-400 
+        Explore our amazing collection of 
+        %i how to guides, 
+        which will help you to solve any problem statement.
+        Follow the practical step-by-step guides and bring your ideas into reality.
+    
+
+    .grid.grid-cols-12.gap-4
+      - @categories.each do |category|
+        .col-span-12.grid.grid-cols-12.gap-4.card
+          .col-span-6
+            = link_to articles_path(category_id: category.id), data: {turbo: true, "turbo_frame": "articles"} do
+              .px-4.py-2
+                .flex.flex-col.items-start
+                  .flex.items-start.justify-start
+                    %svg.h-9.w-9.mr-4.fill-gray-600.dark:fill-gray-400{:viewbox => "0 01 50 50", :xmlns => "http://www.w3.org/2000/svg"}
+                      %path{"clip-rule" => "evenodd", :d => "M6.6 25.5V37 11v14.5ZM27.55 43q1 0 1.725-.75.725-.75.725-1.8 0-1-.725-1.725Q28.55 38 27.5 38q-1 0-1.75.725T25 40.5q0 1 .75 1.75t1.8.75Zm13-21q1 0 1.725-.75.725-.75.725-1.8 0-1-.725-1.725Q41.55 17 40.5 17q-1 0-1.75.725T38 19.5q0 1 .75 1.75t1.8.75ZM12 21h10v-3H12Zm0 9h10v-3H12ZM6.6 40q-1.2 0-2.1-.9-.9-.9-.9-2.1V11q0-1.2.9-2.1.9-.9 2.1-.9h34.8q1.2 0 2.1.9.9.9.9 2.1H6.6v26H19v3Zm20.9 6q-2.3 0-3.9-1.6T22 40.5q0-1.9 1.125-3.35Q24.25 35.7 26 35.2v-6.7h13v-3.7q-1.75-.5-2.875-1.95T35 19.5q0-2.3 1.6-3.9t3.9-1.6q2.3 0 3.9 1.6t1.6 3.9q0 1.9-1.125 3.35Q43.75 24.3 42 24.8v6.7H29v3.7q1.75.5 2.875 1.95T33 40.5q0 2.3-1.6 3.9T27.5 46Z"}
+                    %div
+                      %h3.text-2xl.font-semibold.text-gray-600.dark:text-white 
+                        %span.text-emerald-500	
+                          How-to 
+                        Guides
+                        %span.mb-2.text-base.font-medium.text-gray-500.dark:text-gray-400 
+                          for
+                          %span.font-bold= category.try(:name)                 
+
+                      %p.py-3.text-gray-500.text-sm.dark:text-gray-400{class: "w-4/5"}= category.try(:description)
+                      = link_to articles_path(category_id: category.id) do
+                        .mt-2.text-xs.text-gray-500.uppercase.flex.items-center.hover:text-rose-500
+                          = "#{category.articles.count} articles"
+                          %svg.ml-2.-mr-1.w-4.h-4{:fill => "currentColor", :viewbox => "0 0 20 20", :xmlns => "http://www.w3.org/2000/svg"}
+                            %path{"clip-rule" => "evenodd", :d => "M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z", "fill-rule" => "evenodd"}
+          
+          .col-span-6.flex.items-center
+            %div
+              - category.articles.first(3).each do |article|
+                .w-full.flex.items-start.justify-start.gap-4.text-gray-700.dark:text-gray-400.rounded-lg.dark:text-white
+                  %svg.text-gray-700.dark:text-gray-400.mt-1.h-4.w-4{fill: "currentColor", height: "1em", viewbox: "0 0 24 24", width: "1em", xmlns: "http://www.w3.org/2000/svg"}
+                    %path{d: "M0 0h24v24H0z", fill: "none"}
+                    %path{d: "M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"}
+                  = link_to article.try(:title), article_path(article), class: "font-medium text-gray-700 dark:text-gray-400 hover:underline"
+              - if category.articles.count > 3
+                = link_to articles_path(category_id: category.id) , class: "mt-2 text-sm text-gray-500 flex items-center hover:text-rose-500" do
+                  %svg.h-4.w-4{fill: "currentColor", height: "1em", stroke: "currentColor", "stroke-width" => "0", viewbox: "0 0 24 24", width: "1em", xmlns: "http://www.w3.org/2000/svg"}
+                    %path{d: "M0 0h24v24H0V0z", fill: "none"}
+                    %path{d: "M19 15l-6 6-1.42-1.42L15.17 16H4V4h2v10h9.17l-3.59-3.58L13 9l6 6z"}
+                  See All
+
   .flex.justify-end.items-center.my-6.px-2
     = link_to @next_article.present? ? article_path(@next_article) : what_next_articles_path, class: "py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700" do
       = @next_article.present? ? @next_article.try(:title) : "What Next"

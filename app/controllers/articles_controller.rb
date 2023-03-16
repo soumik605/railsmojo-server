@@ -36,6 +36,7 @@ class ArticlesController < ApplicationController
   def get_started
     _articles_list = Article.get_articles_list
     @next_article = _articles_list.flatten.count > 0 ? Article.find_by_id(_articles_list.flatten[0]) : nil
+    @categories = Category.order(:position).joins(:articles).uniq
   end
 
   def what_next
