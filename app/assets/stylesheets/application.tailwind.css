@@ -33,3 +33,13 @@
 .md_content *{
   @apply text-gray-900 hover:text-gray-900 dark:text-white;
 }
+.markdown-body .highlight pre,
+.markdown-body pre {
+  @apply hover:bg-gray-100 bg-gray-100 dark:bg-slate-700 dark:hover:bg-slate-700;
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  /* background-color: #f6f8fa; */
+  border-radius: 3px;
+}
